@@ -1,0 +1,170 @@
+// [
+//   {
+//     "title": "The Great Gatsby",
+//     "author": "F. Scott Fitzgerald",
+//     "genre": "Classic",
+//     "publication_date": "April 10, 1925",
+//     "reviews": 1245,
+//     "image": "https://upload.wikimedia.org/wikipedia/commons/7/7a/The_Great_Gatsby_Cover_1925_Retouched.jpg"
+//   },
+//   {
+//     "title": "To Kill a Mockingbird",
+//     "author": "Harper Lee",
+//     "genre": "Classic",
+//     "publication_date": "July 11, 1960",
+//     "reviews": 1873,
+//     "image": "https://upload.wikimedia.org/wikipedia/commons/4/4f/To_Kill_a_Mockingbird_%28first_edition_cover%29.jpg"
+//   },
+//   {
+//     "title": "1984",
+//     "author": "George Orwell",
+//     "genre": "Dystopian",
+//     "publication_date": "June 8, 1949",
+//     "reviews": 2134,
+//     "image": ""
+//   },
+//   {
+//     "title": "Pride and Prejudice",
+//     "author": "Jane Austen",
+//     "genre": "Classic",
+//     "publication_date": "January 28, 1813",
+//     "reviews": 1567,
+//     "image": "https://example.com/book_images/pride_prejudice.jpg"
+//   },
+//   {
+//     "title": "The Hobbit",
+//     "author": "J.R.R. Tolkien",
+//     "genre": "Fantasy",
+//     "publication_date": "September 21, 1937",
+//     "reviews": 1789,
+//     "image": "https://example.com/book_images/hobbit.jpg"
+//   },
+//   {
+//     "title": "The Catcher in the Rye",
+//     "author": "J.D. Salinger",
+//     "genre": "Coming-of-age",
+//     "publication_date": "July 16, 1951",
+//     "reviews": 987,
+//     "image": "https://example.com/book_images/catcher_rye.jpg"
+//   },
+//   {
+//     "title": "Harry Potter and the Sorcerer's Stone",
+//     "author": "J.K. Rowling",
+//     "genre": "Fantasy",
+//     "publication_date": "June 26, 1997",
+//     "reviews": 2945,
+//     "image": "https://example.com/book_images/harry_potter.jpg"
+//   },
+//   {
+//     "title": "The Lord of the Rings",
+//     "author": "J.R.R. Tolkien",
+//     "genre": "Fantasy",
+//     "publication_date": "July 29, 1954",
+//     "reviews": 2387,
+//     "image": "https://example.com/book_images/lord_of_rings.jpg"
+//   },
+//   {
+//     "title": "Moby-Dick",
+//     "author": "Herman Melville",
+//     "genre": "Classic",
+//     "publication_date": "October 18, 1851",
+//     "reviews": 982,
+//     "image": "https://example.com/book_images/moby_dick.jpg"
+//   },
+//   {
+//     "title": "The Alchemist",
+//     "author": "Paulo Coelho",
+//     "genre": "Fiction",
+//     "publication_date": "1988",
+//     "reviews": 1456,
+//     "image": "https://example.com/book_images/alchemist.jpg"
+//   },
+//   {
+//     "title": "Brave New World",
+//     "author": "Aldous Huxley",
+//     "genre": "Dystopian",
+//     "publication_date": "1932",
+//     "reviews": 1564,
+//     "image": "https://example.com/book_images/brave_new_world.jpg"
+//   },
+//   {
+//     "title": "The Adventures of Tom Sawyer",
+//     "author": "Mark Twain",
+//     "genre": "Adventure",
+//     "publication_date": "1876",
+//     "reviews": 765,
+//     "image": "https://example.com/book_images/tom_sawyer.jpg"
+//   },
+//   {
+//     "title": "Jane Eyre",
+//     "author": "Charlotte Brontë",
+//     "genre": "Classic",
+//     "publication_date": "October 16, 1847",
+//     "reviews": 1453,
+//     "image": "https://example.com/book_images/jane_eyre.jpg"
+//   },
+//   {
+//     "title": "The Picture of Dorian Gray",
+//     "author": "Oscar Wilde",
+//     "genre": "Gothic",
+//     "publication_date": "June 20, 1890",
+//     "reviews": 1345,
+//     "image": "https://example.com/book_images/dorian_gray.jpg"
+//   },
+//   {
+//     "title": "The Da Vinci Code",
+//     "author": "Dan Brown",
+//     "genre": "Thriller",
+//     "publication_date": "March 18, 2003",
+//     "reviews": 1982,
+//     "image": "https://example.com/book_images/da_vinci_code.jpg"
+//   },
+//   {
+//     "title": "Frankenstein",
+//     "author": "Mary Shelley",
+//     "genre": "Gothic",
+//     "publication_date": "January 1, 1818",
+//     "reviews": 1145,
+//     "image": "https://example.com/book_images/frankenstein.jpg"
+//   },
+//   {
+//     "title": "The Kite Runner",
+//     "author": "Khaled Hosseini",
+//     "genre": "Historical fiction",
+//     "publication_date": "May 29, 2003",
+//     "reviews": 1765,
+//     "image": "https://example.com/book_images/kite_runner.jpg"
+//   },
+//   {
+//     "title": "The Hunger Games",
+//     "author": "Suzanne Collins",
+//     "genre": "Science fiction",
+//     "publication_date": "September 14, 2008",
+//     "reviews": 2398,
+//     "image": "https://example.com/book_images/hunger_games.jpg"
+//   },
+//   {
+//     "title": "The Great Expectations",
+//     "author": "Charles Dickens",
+//     "genre": "Classic",
+//     "publication_date": "August 1861",
+//     "reviews": 1324,
+//     "image": "https://example.com/book_images/great_expectations.jpg"
+//   },
+//   {
+//     "title": "The Shining",
+//     "author": "Stephen King",
+//     "genre": "Horror",
+//     "publication_date": "January 28, 1977",
+//     "reviews": 2176,
+//     "image": "https://example.com/book_images/the_shining.jpg"
+//   },
+//   {
+//     "title": "The Chronicles of Narnia",
+//     "author": "C.S. Lewis",
+//     "genre": "Fantasy",
+//     "publication_date": "October 16, 1950",
+//     "reviews": 1876,
+//     "image": "https://example.com/book_images/narnia.jpg"
+//   }
+// ]
