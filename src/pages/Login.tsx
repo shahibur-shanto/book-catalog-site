@@ -1,74 +1,90 @@
-import React from "react";
+import { useForm } from "react-hook-form";
+import { createUser } from "../redux/features/user/userSlice";
+import { useAppDispatch } from "../redux/hooks";
+
+interface SignupFormInputs {
+  email: string;
+  password: string;
+}
 
 function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignupFormInputs>();
+  const dispatch = useAppDispatch();
+  const onSubmit = async (data: SignupFormInputs) => {
+    await dispatch(createUser({ email: data.email, password: data.password }));
+    console.log(data);
+  };
+
   return (
     <>
-      <section className="h-screen">
-        <div className="h-full">
-          <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
-            <div className="shrink-1 mb-12 grow-0 basis-auto md:mb-0 md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12">
-              <img
-                src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                className="w-full"
-                alt="Sample image"
-              />
-            </div>
-
-            <div className="mb-12 md:mb-0 md:w-8/12 lg:w-5/12 xl:w-5/12">
-              <form>
-                <div className="flex flex-row items-center justify-center lg:justify-start">
-                  <p className="mb-0 mr-4 text-lg">Sign in</p>
-                </div>
-
-                <div className="relative mb-6" data-te-input-wrapper-init>
-                  <input
-                    type="text"
-                    className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    id="exampleFormControlInput2"
-                    placeholder="Email address"
-                  />
+      <section className="bg-gray-50 dark:bg-gray-900">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                Sign in
+              </h1>
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="space-y-4 md:space-y-6"
+                action="#"
+              >
+                <div>
                   <label
-                    for="exampleFormControlInput2"
-                    className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                    for="email"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Email address
+                    Your email
                   </label>
-                </div>
-                <div className="relative mb-6" data-te-input-wrapper-init>
                   <input
-                    type="password"
-                    className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    id="exampleFormControlInput22"
-                    placeholder="Password"
+                    type="email"
+                    id="email"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="name@company.com"
+                    {...register("email", { required: "Email is required" })}
                   />
+                  {errors.email && <p>{errors.email.message}</p>}
+                </div>
+
+                <div>
                   <label
-                    for="exampleFormControlInput22"
-                    className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                    for="password"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Password
                   </label>
+                  <input
+                    type="password"
+                    id="password"
+                    placeholder="••••••••"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    {...register("password", {
+                      required: "Password is required",
+                    })}
+                  />
+                  {errors.password && <p>{errors.password.message}</p>}
                 </div>
 
-                <div className="text-center lg:text-left">
-                  <button
-                    type="submit"
-                    className="inline-block rounded bg-primary px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                    data-te-ripple-init
-                    data-te-ripple-color="black"
+                <div className="flex items-start">
+                  <div className="flex items-center h-5"></div>
+                </div>
+                <button type="submit" className="w-full text-black">
+                  Sign in
+                </button>
+
+                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                  Don't have an account?{" "}
+                  <a
+                    href="/signup"
+                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                   >
-                    Login
-                  </button>
-
-                  <p className="mb-0 mt-2 pt-1 text-sm font-semibold">
-                    Don't have an account?
-                    <a
-                      href="/signup"
-                      className="text-danger transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700"
-                    >
-                      Register
-                    </a>
-                  </p>
-                </div>
+                    Register
+                  </a>
+                </p>
               </form>
             </div>
           </div>
