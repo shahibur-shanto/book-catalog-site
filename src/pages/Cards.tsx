@@ -1,6 +1,6 @@
 export default function Cards(book) {
   const { title, author, genre, image, publication_date, reviews } = book.book;
-  console.log(book.book.title);
+  // console.log(book.book.title);
 
   const default_image =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaUHAVfCtF1azwHdv8EgZv2z69m8W5T8pHGw&usqp=CAU";

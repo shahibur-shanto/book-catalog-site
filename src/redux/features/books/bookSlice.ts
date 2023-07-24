@@ -9,15 +9,18 @@ interface IHomeBook {
 const initialState: IHomeBook = {
   books: [],
 };
-const homeBookSlice = createSlice({
+const allBookSlice = createSlice({
   name: "book",
   initialState,
   reducers: {
-    addHomeBook: (state, action: PayloadAction<IBooks>) => {
+    allBook: (state, action: PayloadAction<IBooks>) => {
+      state.books.push(action.payload);
+    },
+    searchBook: (state, action: PayloadAction<IBooks>) => {
       state.books.push(action.payload);
     },
   },
 });
 
-export const { addHomeBook } = homeBookSlice.actions;
-export default homeBookSlice.reducer;
+export const { allBook } = allBookSlice.actions;
+export default allBookSlice.reducer;

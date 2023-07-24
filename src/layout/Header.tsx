@@ -1,8 +1,14 @@
 import { useState } from "react";
 import logo from "../assets/logo/logo.jpg";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [toggle, setToggle] = useState(false);
+  const [input, setInput] = useState("");
+  // const handleSearch = (e) => {
+  //   e.preventDefault();
+  //   dispatch(searchBooks({ title, author, genre }));
+  // };
 
   return (
     <>
@@ -10,47 +16,6 @@ export default function Navbar() {
         <nav className="bg-yellow-800 w-full">
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
-              {/* <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              <button
-                type="button"
-                className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                aria-controls="mobile-menu"
-                aria-expanded="false"
-              >
-                <span className="sr-only">Open main menu</span>
-
-                <svg
-                  className="block h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                </svg>
-
-                <svg
-                  className="hidden h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div> */}
-
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <img
@@ -62,14 +27,14 @@ export default function Navbar() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     <a
-                      href="#"
+                      href="/"
                       className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                       aria-current="page"
                     >
                       Home
                     </a>
                     <a
-                      href="#"
+                      href="./allbooks"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                     >
                       All Books
@@ -89,6 +54,7 @@ export default function Navbar() {
                     <div className="relative  w-96">
                       <div className="absoluteinset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
                       <input
+                        onChange={(e) => setInput(e.target.value)}
                         type="search"
                         id="default-search"
                         className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -97,6 +63,7 @@ export default function Navbar() {
                       />
                       <button
                         type="submit"
+                        // onClick={handleSearch}
                         className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
                         Search

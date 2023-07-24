@@ -10,7 +10,7 @@ const initialState: IHomeBook = {
   books: [],
 };
 const homeBookSlice = createSlice({
-  name: "book",
+  name: "home",
   initialState,
   reducers: {
     addHomeBook: (state, action: PayloadAction<IBooks>) => {
