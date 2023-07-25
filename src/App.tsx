@@ -10,6 +10,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { setLoading, setUser } from "./redux/features/user/userSlice";
 import { auth } from "./firebase";
 import Navbar from "./layout/Header";
+import { PersistGate } from "redux-persist/integration/react";
+import storage from "redux-persist/lib/storage";
 
 function App() {
   const dispatch = useDispatch();
