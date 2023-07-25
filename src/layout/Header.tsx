@@ -1,15 +1,22 @@
 import { useState } from "react";
 import logo from "../assets/logo/logo.jpg";
-import { Link } from "react-router-dom";
+import { useAppSelector } from "../redux/hooks";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
+import { signOut } from "firebase/auth";
 
 export default function Navbar() {
   const [toggle, setToggle] = useState(false);
-  const [input, setInput] = useState("");
-  // const handleSearch = (e) => {
-  //   e.preventDefault();
-  //   dispatch(searchBooks({ title, author, genre }));
-  // };
 
+  const { user } = useAppSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  const pathname = useLocation();
+  const handleLogOut = async () => {
+    await signOut(auth).then(() => {
+      navigate(pathname);
+    });
+  };
   return (
     <>
       <header>
@@ -39,18 +46,34 @@ export default function Navbar() {
                     >
                       All Books
                     </a>
-                    <a
-                      href="#"
-                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                    >
-                      Sign In
-                    </a>
-                    <a
-                      href="#"
-                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                    >
-                      Sign Up
-                    </a>
+                    {!user.email && (
+                      <>
+                        <a
+                          href="/login"
+                          className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                        >
+                          Sign In
+                        </a>
+                        <Link
+                          to="/"
+                          className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                        >
+                          Sign Up
+                        </Link>
+                      </>
+                    )}
+                    {user.email && (
+                      <>
+                        {" "}
+                        <a
+                          onClick={handleLogOut}
+                          href="/"
+                          className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                        >
+                          Logout
+                        </a>
+                      </>
+                    )}
                     <div className="relative  w-96">
                       <div className="absoluteinset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
                       <input
@@ -80,18 +103,6 @@ export default function Navbar() {
                           aria-haspopup="true"
                         >
                           Filtrs
-                          {/* <svg
-                            className="-mr-1 h-5 w-5 text-gray-400"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                              clip-rule="evenodd"
-                            />
-                          </svg> */}
                         </button>
                       </div>
                       {toggle && (
@@ -129,47 +140,8 @@ export default function Navbar() {
                 </div>
               </div>
 
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <div>
-                  <button>
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
-                    />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="sm:hidden" id="mobile-menu">
-            <div className="space-y-1 px-2 pb-3 pt-2">
-              <a
-                href="#"
-                className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
-                aria-current="page"
-              >
-                Dashboard
-              </a>
-              <a
-                href="#"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-              >
-                Team
-              </a>
-              <a
-                href="#"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-              >
-                Projects
-              </a>
-              <a
-                href="#"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-              >
-                Calendar
-              </a>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"></div>
+              <p>{user.email}</p>
             </div>
           </div>
         </nav>

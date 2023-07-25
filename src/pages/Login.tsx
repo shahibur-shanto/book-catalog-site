@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
-import { createUser } from "../redux/features/user/userSlice";
-import { useAppDispatch } from "../redux/hooks";
+import { loginUser } from "../redux/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-interface SignupFormInputs {
+interface SigninFormInputs {
   email: string;
   password: string;
 }
@@ -12,13 +14,23 @@ function Login() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignupFormInputs>();
-  const dispatch = useAppDispatch();
-  const onSubmit = async (data: SignupFormInputs) => {
-    await dispatch(createUser({ email: data.email, password: data.password }));
-    console.log(data);
-  };
+  } = useForm<SigninFormInputs>();
 
+  const { user, isLoading } = useAppSelector((state) => state.user);
+
+  console.log(user.email, isLoading);
+  const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
+
+  const onSubmit = async (data: SigninFormInputs) => {
+    await dispatch(loginUser({ email: data.email, password: data.password }));
+  };
+  useEffect(() => {
+    if (user.email && !isLoading) {
+      navigate("/allbooks");
+    }
+  }, [user.email, isLoading]);
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900">
