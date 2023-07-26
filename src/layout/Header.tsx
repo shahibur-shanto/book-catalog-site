@@ -1,20 +1,31 @@
 import { useState } from "react";
 import logo from "../assets/logo/logo.jpg";
-import { useAppSelector } from "../redux/hooks";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
+import { useForm } from "react-hook-form";
+import { setUser } from "../redux/features/user/userSlice";
 
 export default function Navbar() {
   const [toggle, setToggle] = useState(false);
 
   const { user } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
+  interface SigninFormInputs {
+    email: string;
+  }
 
-  const pathname = useLocation();
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SigninFormInputs>();
+
+  const dispatch = useAppDispatch();
   const handleLogOut = async () => {
     await signOut(auth).then(() => {
-      navigate(pathname);
+      navigate("./");
+      dispatch(setUser(null));
     });
   };
   return (
@@ -55,7 +66,7 @@ export default function Navbar() {
                           Sign In
                         </a>
                         <Link
-                          to="/"
+                          to="/signup"
                           className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                         >
                           Sign Up
@@ -64,14 +75,14 @@ export default function Navbar() {
                     )}
                     {user.email && (
                       <>
-                        {" "}
-                        <a
-                          onClick={handleLogOut}
-                          href="/"
-                          className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                        >
-                          Logout
-                        </a>
+                        <form onSubmit={handleSubmit(handleLogOut)} action="/">
+                          <button
+                            type="submit"
+                            className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                          >
+                            Logout
+                          </button>
+                        </form>
                       </>
                     )}
                     <div className="relative  w-96">

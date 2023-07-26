@@ -6,11 +6,20 @@ import AllBooks from "../pages/AllBooks";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import PrivateRoute from "./privateRoute";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
+import store from "../redux/store";
+
+let persistor = persistStore(store);
 
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
+    ),
     children: [
       {
         index: true,
