@@ -9,8 +9,10 @@ import PrivateRoute from "./privateRoute";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import store from "../redux/store";
+import SearchBook from "../pages/SearchBook";
+import { BookDetail } from "../pages/BookDetail";
 
-let persistor = persistStore(store);
+const persistor = persistStore(store);
 
 const routes = createBrowserRouter([
   {
@@ -52,6 +54,15 @@ const routes = createBrowserRouter([
         <AllBooks />
       </PrivateRoute>
     ),
+  },
+
+  {
+    path: "/search/:searchText",
+    element: <SearchBook />,
+  },
+  {
+    path: "/book-details/:id",
+    element: <BookDetail />,
   },
   {
     path: "/signup",

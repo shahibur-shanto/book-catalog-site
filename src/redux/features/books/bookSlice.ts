@@ -18,9 +18,10 @@ const allBookSlice = createSlice({
     },
     searchBook: (state, action: PayloadAction<IBooks>) => {
       state.books.push(action.payload);
+      // console.log(action.payload);
     },
   },
 });
 
-export const { allBook } = allBookSlice.actions;
+export const { allBook, searchBook } = allBookSlice.actions;
 export default allBookSlice.reducer;

@@ -9,6 +9,7 @@ import { setUser } from "../redux/features/user/userSlice";
 
 export default function Navbar() {
   const [toggle, setToggle] = useState(false);
+  const [input, setInput] = useState("");
 
   const { user } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
@@ -16,15 +17,17 @@ export default function Navbar() {
     email: string;
   }
 
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SigninFormInputs>();
+  const { handleSubmit } = useForm<SigninFormInputs>();
 
   const dispatch = useAppDispatch();
+  const handleSearch = (search: string) => {
+    search = input;
+    navigate(`/search/${search}`);
+  };
+
   const handleLogOut = async () => {
     await signOut(auth).then(() => {
-      navigate("./");
+      navigate("/");
       dispatch(setUser(null));
     });
   };
@@ -52,7 +55,7 @@ export default function Navbar() {
                       Home
                     </a>
                     <a
-                      href="./allbooks"
+                      href="/allbooks"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                     >
                       All Books
@@ -95,13 +98,14 @@ export default function Navbar() {
                         placeholder="Search title, author, or genre..."
                         required
                       />
-                      <button
-                        type="submit"
-                        // onClick={handleSearch}
-                        className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                      >
-                        Search
-                      </button>
+                      <form onSubmit={handleSubmit(handleSearch)} action="/">
+                        <button
+                          type="submit"
+                          className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        >
+                          Search
+                        </button>
+                      </form>
                     </div>
                     <div className="relative inline-block text-left">
                       <div>

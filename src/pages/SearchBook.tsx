@@ -1,10 +1,14 @@
-// import { useEffect, useState } from "react";
-// import data from "../assets/data.json";
 import Cards from "./Cards";
-import { useGetHomeBooksQuery } from "../redux/features/books/booksApi";
+import { useSearchBooksQuery } from "../redux/features/books/booksApi";
+import Navbar from "../layout/Header";
+import Footer from "../layout/Footer";
+import { useParams } from "react-router-dom";
 
-export default function Home() {
-  const { data, isLoading, isError } = useGetHomeBooksQuery(undefined);
+export default function SearchBook() {
+  const { searchText } = useParams();
+  console.log(searchText);
+  const { data, isLoading, isError } = useSearchBooksQuery(searchText);
+  console.log(data);
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -17,11 +21,14 @@ export default function Home() {
 
   return (
     <>
+      <Navbar />
       <div className="grid grid-cols-3 gap-4">
         {data.data.map((book) => (
           <Cards book={book} key={book._id} />
         ))}
       </div>
+
+      <Footer />
     </>
   );
 }

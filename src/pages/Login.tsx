@@ -18,7 +18,7 @@ function Login() {
 
   const { user, isLoading } = useAppSelector((state) => state.user);
 
-  console.log(user.email, isLoading);
+  // console.log(user.email, isLoading);
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();

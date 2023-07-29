@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Footer from "../layout/Footer";
 import Navbar from "../layout/Header";
 import { useGetBooksQuery } from "../redux/features/books/booksApi";
@@ -15,6 +16,22 @@ function AllBooks() {
   if (!data?.data || !Array.isArray(data.data)) {
     return null; // or any appropriate fallback UI when data is not available
   }
+
+  // let [genre, setGenre] = useState("");
+
+  // let filterBook;
+
+  // if (genre) {
+  //   filterBook = data?.data?.filter((item) => item.genre === genre);
+  // }
+  // // else if () {
+  // //   filterBook = data?.data?.filter(
+  // //     (item: { price: number }) => item.price < priceRange
+  // //   );
+  // // }
+  // else {
+  //   filterBook = data?.data;
+  // }
 
   return (
     <>
