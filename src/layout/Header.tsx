@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { useState } from "react";
 import logo from "../assets/logo/logo.jpg";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -20,7 +23,7 @@ export default function Navbar() {
   const { handleSubmit } = useForm<SigninFormInputs>();
 
   const dispatch = useAppDispatch();
-  const handleSearch = (search: string) => {
+  const handleSearch = (search: any) => {
     search = input;
     navigate(`/search/${search}`);
   };

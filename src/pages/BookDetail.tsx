@@ -1,15 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useParams } from "react-router-dom";
 import { useSingleBookQuery } from "../redux/features/books/booksApi";
 import Navbar from "../layout/Header";
 import Footer from "../layout/Footer";
-import { BookDetailsCard } from "./BookDetailsCard";
 
 export const BookDetail = () => {
   const { id } = useParams();
   console.log(id);
   const { data, isLoading, isError } = useSingleBookQuery(id);
 
-  const { title, author, genre, image, publication_date, reviews } = data;
+  const { title, author, genre, publication_date } = data;
 
   if (isLoading) {
     return <p>Loading...</p>;

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home";
@@ -29,7 +31,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "/Cards",
-        element: <Cards />,
+        element: <Cards book={undefined} />,
       },
 
       //   {

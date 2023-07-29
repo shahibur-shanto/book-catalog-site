@@ -1,13 +1,17 @@
 import { IBooks } from "../types/globalTypes";
 
 interface IProps {
-  book: IBooks;
+  book?: IBooks;
 }
 
 export default function Cards({ book }: IProps) {
+  if (!book) {
+    return <div>Book data is not available.</div>;
+  }
+
   const { title, author, genre, image, publication_date } = book;
-  let year = new Date(publication_date);
-  year = year.getFullYear();
+  const year = new Date(publication_date);
+  const getYear = year.getFullYear();
 
   const default_image =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaUHAVfCtF1azwHdv8EgZv2z69m8W5T8pHGw&usqp=CAU";
@@ -30,7 +34,7 @@ export default function Cards({ book }: IProps) {
           Genre: {genre}
         </p>
         <p className="m-2 mb-3 font-normal text-gray-700 dark:text-gray-400 text-center">
-          Year: {year}
+          Year: {getYear}
         </p>
 
         <a
