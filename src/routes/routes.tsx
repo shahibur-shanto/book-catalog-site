@@ -13,6 +13,7 @@ import { persistStore } from "redux-persist";
 import store from "../redux/store";
 import SearchBook from "../pages/SearchBook";
 import { BookDetail } from "../pages/BookDetail";
+import EditBook from "../pages/EditBook";
 
 const persistor = persistStore(store);
 
@@ -34,10 +35,10 @@ const routes = createBrowserRouter([
         element: <Cards book={undefined} />,
       },
 
-      //   {
-      //     path: "/product-details/:id",
-      //     element: <ProductDetails />,
-      //   },
+      {
+        path: "/book-edit/:id",
+        element: <EditBook />,
+      },
       //   {
       //     path: "/checkout",
       //     element: <Checkout />,
@@ -70,10 +71,10 @@ const routes = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
-  //   {
-  //     path: "*",
-  //     element: <NotFound />,
-  //   },
+  // {
+  //   path: "*",
+  //   element: <NotFound />,
+  // },
 ]);
 
 export default routes;
