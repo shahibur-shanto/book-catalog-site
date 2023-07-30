@@ -9,15 +9,13 @@ export const BookDetail = () => {
   console.log(id);
   const { data, isLoading, isError } = useSingleBookQuery(id);
 
-  const { title, author, genre, publication_date } = data;
-
   if (isLoading) {
     return <p>Loading...</p>;
   }
   if (isError) {
     return <p>Error occurred while fetching data.</p>;
   }
-
+  const { title, author, genre, publication_date } = data || {};
   return (
     <>
       <Navbar />
