@@ -1,13 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSingleBookQuery } from "../redux/features/books/booksApi";
 import Navbar from "../layout/Header";
 import Footer from "../layout/Footer";
 
 export const BookDetail = () => {
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const { data, isLoading, isError } = useSingleBookQuery(id);
+
+  const navigate = useNavigate();
+  const handleEdit = (id: any) => {
+    navigate(`/book-edit/${id}`);
+  };
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -16,6 +23,8 @@ export const BookDetail = () => {
     return <p>Error occurred while fetching data.</p>;
   }
   const { title, author, genre, publication_date } = data || {};
+  console.log(data);
+
   return (
     <>
       <Navbar />
@@ -57,8 +66,9 @@ export const BookDetail = () => {
                 Submit Review
               </button>
             </div>
-            <div className="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+            <div className="md:grid md:grid-cols-3 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
               <button
+                onClick={() => handleEdit(id)}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
@@ -70,6 +80,12 @@ export const BookDetail = () => {
                 type="submit"
               >
                 Delete
+              </button>
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+              >
+                Add Book
               </button>
             </div>
             <div className="md:grid md:grid-cols-1 m-2 py-2 px-4 rounded bg-cyan-500 hover:bg-cyan-600">

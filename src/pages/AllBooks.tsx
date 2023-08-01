@@ -22,7 +22,6 @@ function AllBooks() {
   if (!data?.data || !Array.isArray(data?.data)) {
     return null; // or any appropriate fallback UI when data is not available
   }
-
   // let [genre, setGenre] = useState("");
 
   // let filterBook;

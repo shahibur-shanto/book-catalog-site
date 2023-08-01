@@ -30,15 +30,7 @@ const routes = createBrowserRouter([
         index: true,
         element: <Home />,
       },
-      {
-        path: "/Cards",
-        element: <Cards book={undefined} />,
-      },
 
-      {
-        path: "/book-edit/:id",
-        element: <EditBook />,
-      },
       //   {
       //     path: "/checkout",
       //     element: <Checkout />,
@@ -46,8 +38,16 @@ const routes = createBrowserRouter([
     ],
   },
   {
+    path: "/Cards",
+    element: <Cards book={undefined} />,
+  },
+  {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/book-edit/:id",
+    element: <EditBook />,
   },
 
   {

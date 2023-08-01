@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import bookReducer from "./features/books/bookSlice";
-import homeReducer from "./features/home/homeSlice";
+// import homeReducer from "./features/home/homeSlice";
 import userReducer from "./features/user/userSlice";
 import { api } from "./api/apiSlice";
 import storage from "redux-persist/lib/storage";
@@ -15,7 +15,7 @@ const persistConfig = {
 
 const reducer = combineReducers({
   book: bookReducer,
-  home: homeReducer,
+  // home: homeReducer,
   user: userReducer,
 
   [api.reducerPath]: api.reducer,
