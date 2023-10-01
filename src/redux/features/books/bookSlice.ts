@@ -20,6 +20,7 @@ const allBookSlice = createSlice({
       state.books.push(action.payload);
       // console.log(action.payload);
     },
+    
   },
 });
 

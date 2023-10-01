@@ -9,17 +9,16 @@ import { IBooks } from "../types/globalTypes";
 
 export default function Home() {
   const { data, isLoading, isError } = useGetHomeBooksQuery(undefined);
-
   if (isLoading) {
     return <p>Loading...</p>;
   }
   if (isError) {
     return <p>Error occurred while fetching data.</p>;
   }
+
   if (!data?.data || !Array.isArray(data?.data)) {
     return null; // or any appropriate fallback UI when data is not available
   }
-  console.log(data);
 
   return (
     <>

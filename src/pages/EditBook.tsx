@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -5,18 +6,20 @@
 import { useState } from "react";
 import {
   useEditBookMutation,
-  useGetHomeBooksQuery,
   useSingleBookQuery,
 } from "../redux/features/books/booksApi";
 import { useParams } from "react-router-dom";
 
 const EditBook = () => {
   const { id: bookId } = useParams();
+  const { data, refetch } = useSingleBookQuery(bookId);
+  const { title, author, genre, publication_date } = data || {};
+
   const [updatedBook, setUpdatedBook] = useState({
-    title: "",
-    author: "",
-    genre: "",
-    publication_date: "",
+    title: title,
+    author: author,
+    genre: genre,
+    publication_date: publication_date,
   });
 
   const [updateBook, { isLoading, isError }] = useEditBookMutation();
@@ -25,7 +28,7 @@ const EditBook = () => {
     const { name, value } = e.target;
     setUpdatedBook((prev) => ({ ...prev, [name]: value }));
   };
-  const { refetch } = useGetHomeBooksQuery(undefined);
+
   const handleSubmit = () => {
     updateBook({ id: bookId, data: updatedBook })
       .unwrap()

@@ -14,6 +14,8 @@ import store from "../redux/store";
 import SearchBook from "../pages/SearchBook";
 import { BookDetail } from "../pages/BookDetail";
 import EditBook from "../pages/EditBook";
+import AddNewBook from "../pages/AddNewBook";
+import { Review } from "../pages/Review";
 
 const persistor = persistStore(store);
 
@@ -46,8 +48,20 @@ const routes = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: "/addNewBook",
+    element: (
+      <PrivateRoute>
+        <AddNewBook />
+      </PrivateRoute>
+    ),
+  },
+  {
     path: "/book-edit/:id",
     element: <EditBook />,
+  },
+  {
+    path: "/review/:id",
+    element: <Review />,
   },
 
   {
