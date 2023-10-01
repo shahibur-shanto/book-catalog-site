@@ -6,6 +6,6 @@ export const api = createApi({
     // baseUrl: "https://book-catalog-gilt.vercel.app",
     baseUrl: "http://localhost:8923",
   }),
-  tagTypes: ["comments", "/"],
+  tagTypes: ["comments", "/", "books"],
   endpoints: () => ({}),
 });

@@ -6,6 +6,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
+  useDeleteBookMutation,
   usePostCommentsMutation,
   useSingleBookQuery,
 } from "../redux/features/books/booksApi";
@@ -59,6 +60,28 @@ export const BookDetail = () => {
 
   const handleEdit = (id: any) => {
     navigate(`/book-edit/${id}`);
+  };
+
+  const [deleteBookMutation] = useDeleteBookMutation();
+
+  const handleDelete = (id: any) => {
+    console.log(id);
+    console.log(deleteBookMutation(id));
+    const result = confirm("Are you sure to delete?");
+    if (result) {
+      deleteBookMutation(id)
+        .unwrap()
+        .then((response) => {
+          console.log("Book deleted successfully:", response);
+          const notify = () => toast("Thanks for your review");
+          notify();
+          // navigate("/allbooks");
+        })
+        .catch((error) => {
+          console.error("Error deleting book:", error);
+          // Handle error
+        });
+    }
   };
 
   if (isLoading) {
@@ -129,12 +152,13 @@ export const BookDetail = () => {
                   Edit
                 </button>
 
-                <button
+                <Link
+                  to="/allbooks"
+                  onClick={() => handleDelete(id)}
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  type="submit"
                 >
                   Delete
-                </button>
+                </Link>
                 <Link
                   to="/addNewBook"
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
