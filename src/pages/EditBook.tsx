@@ -10,6 +10,9 @@ import {
 } from "../redux/features/books/booksApi";
 import { useParams } from "react-router-dom";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const EditBook = () => {
   const { id: bookId } = useParams();
   const { data, refetch } = useSingleBookQuery(bookId);
@@ -34,7 +37,9 @@ const EditBook = () => {
       .unwrap()
       .then((response) => {
         console.log("Book updated successfully:", response);
+        const notify = () => toast("Thanks for your review");
         refetch();
+        notify()
         // Handle successful update
       })
       .catch((error) => {
@@ -124,6 +129,7 @@ const EditBook = () => {
           </button>
         </form>
       </div>
+      <ToastContainer />
     </>
   );
 };
