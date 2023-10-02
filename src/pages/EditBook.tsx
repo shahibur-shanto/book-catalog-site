@@ -37,7 +37,7 @@ const EditBook = () => {
       .unwrap()
       .then((response) => {
         console.log("Book updated successfully:", response);
-        const notify = () => toast("Thanks for your review");
+        const notify = () => toast("Your edit successfully done");
         refetch();
         notify()
         // Handle successful update
