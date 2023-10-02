@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import Cards from "./Cards";
 import {
-  useFilterBooksQuery,
   useSearchBooksQuery,
 } from "../redux/features/books/booksApi";
 import Navbar from "../layout/Header";
