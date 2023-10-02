@@ -14,6 +14,8 @@ export default function Navbar() {
   const [toggle, setToggle] = useState(false);
   const [input, setInput] = useState("");
 
+  const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
   const { user } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   interface SigninFormInputs {
@@ -26,6 +28,22 @@ export default function Navbar() {
   const handleSearch = (search: any) => {
     search = input;
     navigate(`/search/${search}`);
+  };
+
+  const handleFilter = () => {
+    const queryParams = [];
+
+    if (selectedGenre) {
+      queryParams.push(`genre=${selectedGenre}`);
+    }
+
+    if (selectedYear) {
+      queryParams.push(`year=${selectedYear}`);
+    }
+
+    const query = queryParams.join("&");
+    console.log("Query:", query);
+    navigate(`/filter?${query}`);
   };
 
   const handleLogOut = async () => {
@@ -117,48 +135,76 @@ export default function Navbar() {
                       </form>
                     </div>
                     <div className="relative inline-block text-left">
-                      <div>
-                        <button
-                          onClick={() => setToggle(!toggle)}
-                          type="button"
-                          className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                          id="menu-button"
-                          aria-expanded="true"
-                          aria-haspopup="true"
-                        >
-                          Filtrs
-                        </button>
-                      </div>
-                      {toggle && (
-                        <div
-                          className="absolute center-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                          role="menu"
-                          aria-orientation="vertical"
-                          aria-labelledby="menu-button"
-                          tab-index="-1"
-                        >
-                          <div className="py-1" role="none">
-                            <a
-                              href="#"
-                              className="text-gray-700 block px-4 py-2 text-sm"
-                              role="menuitem"
-                              tab-index="-1"
-                              id="menu-item-0"
-                            >
-                              genre
-                            </a>
-                            <a
-                              href="#"
-                              className="text-gray-700 block px-4 py-2 text-sm"
-                              role="menuitem"
-                              tab-index="-1"
-                              id="menu-item-1"
-                            >
-                              publication year
-                            </a>
-                          </div>
+                      <form onSubmit={handleSubmit(handleFilter)} action="/">
+                        <div>
+                          <button
+                            onClick={() => setToggle(!toggle)}
+                            type="button"
+                            className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                            id="menu-button"
+                            aria-expanded="true"
+                            aria-haspopup="true"
+                          >
+                            Filters
+                          </button>
                         </div>
-                      )}
+                        {toggle && (
+                          <div
+                            className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                            role="menu"
+                            aria-orientation="vertical"
+                            aria-labelledby="menu-button"
+                          >
+                            <div className="py-1" role="none">
+                              <div className="px-4 py-2">
+                                <label
+                                  htmlFor="genre"
+                                  className="text-gray-700"
+                                >
+                                  Genre:
+                                </label>
+                                <select
+                                  id="genre"
+                                  className="w-full mt-1 form-select"
+                                  onChange={(e) =>
+                                    setSelectedGenre(e.target.value)
+                                  }
+                                >
+                                  <option value="">All Genres</option>
+                                  <option value="Fantasy">Fantasy</option>
+                                  <option value="Classic">Classic</option>
+                                  {/* Add more genre options */}
+                                </select>
+                              </div>
+                              <div className="px-4 py-2">
+                                <label htmlFor="year" className="text-gray-700">
+                                  Publication Year:
+                                </label>
+                                <select
+                                  id="year"
+                                  className="w-full mt-1 form-select"
+                                  onChange={(e) =>
+                                    setSelectedYear(e.target.value)
+                                  }
+                                >
+                                  <option value="">All Years</option>
+                                  <option value="2023">2023</option>
+                                  <option value="2022">2022</option>
+                                  {/* Add more year options */}
+                                </select>
+                              </div>
+                            </div>
+                            <button
+                              type="submit"
+                              onClick={handleFilter}
+                              className="block w-full px-4 py-2 text-sm text-center text-white bg-blue-700 hover:bg-blue-800"
+                              role="menuitem"
+                            >
+                              Apply Filters
+                            </button>
+                          </div>
+                        )}
+                      </form>
                     </div>
                   </div>
                 </div>

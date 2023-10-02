@@ -15,6 +15,7 @@ import SearchBook from "../pages/SearchBook";
 import { BookDetail } from "../pages/BookDetail";
 import EditBook from "../pages/EditBook";
 import AddNewBook from "../pages/AddNewBook";
+import FilterBook from "../pages/FilterBooks";
 
 const persistor = persistStore(store);
 
@@ -71,6 +72,10 @@ const routes = createBrowserRouter([
   {
     path: "/search/:searchText",
     element: <SearchBook />,
+  },
+  {
+    path: "/filter",
+    element: <FilterBook />,
   },
   {
     path: "/book-details/:id",

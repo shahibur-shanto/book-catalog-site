@@ -2,7 +2,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import Cards from "./Cards";
-import { useSearchBooksQuery } from "../redux/features/books/booksApi";
+import {
+  useFilterBooksQuery,
+  useSearchBooksQuery,
+} from "../redux/features/books/booksApi";
 import Navbar from "../layout/Header";
 import Footer from "../layout/Footer";
 import { useParams } from "react-router-dom";

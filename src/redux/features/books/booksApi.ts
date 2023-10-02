@@ -16,9 +16,31 @@ const BookApi = api.injectEndpoints({
     singleBook: builder.query({
       query: (id) => `/book-details/${id}`,
     }),
-    getComment: builder.query({
-      query: (id) => `/comment/${id}`,
-      providesTags: ["comments"],
+    filterBooks: builder.query({
+      query: (params) => {
+        // Extract the filter criteria from 'params'
+        const { genre, year } = params;
+
+        // Build the query string with the filter criteria
+        let queryString = "/filter?";
+
+        // Add 'genre' if provided
+        if (genre) {
+          queryString += `genre=${genre}&`;
+        }
+
+        // Add 'year' if provided
+        if (year) {
+          queryString += `year=${year}&`;
+        }
+
+        // Remove the trailing '&' if it exists
+        if (queryString.endsWith("&")) {
+          queryString = queryString.slice(0, -1);
+        }
+
+        return queryString;
+      },
     }),
     postComments: builder.mutation({
       query: ({ id, data }) => ({
@@ -62,7 +84,7 @@ export const {
   useGetBooksQuery,
   useSingleBookQuery,
   usePostCommentsMutation,
-  useGetCommentQuery,
+  useFilterBooksQuery,
   useSearchBooksQuery,
   useEditBookMutation,
   useAddNewBookMutation,
